@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tweet Scroll Counter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    
+    #container {
+      text-align: center;
+    }
+    
+    #counter {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>Tweet Scroll Counter</h1>
+    <p id="currentDate"></p>
+    <p id="counter">600</p>
+
+    <button onclick="decrementCounter()">Decrement</button>
+    <button onclick="displayCurrentDate()">Show Current Date</button>
+  </div>
+
+  <script>
+    // Scroll counter
+    window.addEventListener('scroll', function() {
+      var windowHeight = window.innerHeight;
+      var documentHeight = document.documentElement.scrollHeight;
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+
+      if (documentHeight - scrollTop <= windowHeight) {
+        incrementCounter();
+      }
+    });
+
+    function incrementCounter() {
+      var counterElement = document.getElementById('counter');
+      var currentCount = parseInt(counterElement.innerText);
+      counterElement.innerText = currentCount + 1;
+    }
+
+    function decrementCounter() {
+      var counterElement = document.getElementById('counter');
+      var currentCount = parseInt(counterElement.innerText);
+
+      if (currentCount > 0) {
+        counterElement.innerText = currentCount - 1;
+      }
+    }
+
+    // Display current date
+    function displayCurrentDate() {
+      var currentDateElement = document.getElementById('currentDate');
+      var currentDate = new Date().toLocaleDateString();
+      currentDateElement.innerText = currentDate;
+    }
+  </script>
+</body>
+</html>
+
